@@ -2,6 +2,14 @@
 {% set version = "0.1.27" %}
 {% set sha256 = "c8ffece2e1c5922bec11a02c111296c0690ba5a48c9c4c2c827ecaa9e603995f" %}
 
+# on our linux builders there is no X11 installed and therefore import
+# test will fail
+{% if target_platform != "linux-aarch64" and target_platform != "linux-64"%}
+{% set enable_testingui = true %}
+{% else %}
+{% set enable_testingui = false %}
+{% endif %}
+
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -39,10 +47,12 @@ requirements:
     - qasync
     - importlib_metadata
 
+{% if enable_testingui %}
 test:
   imports:
     - orangecanvas.main
     - orangecanvas.application.canvasmain
+{% endif %}
 
 about:
   home: https://github.com/biolab/orange-canvas-core
