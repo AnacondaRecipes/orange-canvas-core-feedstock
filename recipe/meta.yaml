@@ -1,6 +1,6 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.1.27" %}
-{% set sha256 = "c8ffece2e1c5922bec11a02c111296c0690ba5a48c9c4c2c827ecaa9e603995f" %}
+{% set version = "0.1.28" %}
+{% set sha256 = "ff7f53eb2410ff809176ab2eee925efa711003b02d98074d1167aba12abdf642" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
@@ -21,20 +21,18 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
+  # NOTE-TO-SELF: maybe I don't need to skip these anymore
   skip: True  # [py<37]
   skip: True  # [linux and (s390x or ppc64le)]
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
-    - setuptools
-    - wheel
   run:
-    - python
+    - python >=3.6
     - pip    >=18.0
     - setuptools
-    - wheel
     - anyqt >=0.1.0
     - pyqt
     - docutils
