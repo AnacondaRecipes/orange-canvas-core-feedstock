@@ -21,8 +21,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
-  # NOTE-TO-SELF: maybe I don't need to skip these anymore
-  skip: True  # [py<37]
+  skip: True  # [py<38]
   skip: True  # [linux and (s390x or ppc64le)]
 
 requirements:
