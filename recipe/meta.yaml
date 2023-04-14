@@ -40,7 +40,6 @@ requirements:
     - requests
     - cachecontrol-with-filecache >=0.12.6
     # via cachecontrol[filecache]
-    - lockfile >=0.9
     - dictdiffer
     - qasync
 
