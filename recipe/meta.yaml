@@ -20,36 +20,39 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: True  # [py<38]
   skip: True  # [linux and (s390x or ppc64le)]
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
   run:
-    - python >=3.6
-    - pip    >=18.0
+    - python
+    - pip >=18.0
     - setuptools
     - anyqt >=0.1.0
     - pyqt
     - docutils
     - commonmark >=0.8.1
     - requests
-    - cachecontrol >=0.12.6
+    - cachecontrol-with-filecache >=0.12.6
     # via cachecontrol[filecache]
     - lockfile >=0.9
     - dictdiffer
     - qasync
-    - importlib_metadata
 
-{% if enable_testingui %}
 test:
+{% if enable_testingui %}
   imports:
     - orangecanvas.main
     - orangecanvas.application.canvasmain
 {% endif %}
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/biolab/orange-canvas-core
