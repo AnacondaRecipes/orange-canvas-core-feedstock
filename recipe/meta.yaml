@@ -28,10 +28,10 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
   run:
     - python
     - pip >=18.0
-    - setuptools
     - anyqt >=0.1.0
     - pyqt
     - docutils
