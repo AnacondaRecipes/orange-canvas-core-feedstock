@@ -1,6 +1,6 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.1.27" %}
-{% set sha256 = "c8ffece2e1c5922bec11a02c111296c0690ba5a48c9c4c2c827ecaa9e603995f" %}
+{% set version = "0.1.29" %}
+{% set sha256 = "2541f14ca598f051a0bea0663bc9bcb61ac1790dc2b50292367728f5948a5e7f" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
@@ -20,8 +20,8 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
-  skip: True  # [py<37]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: True  # [py<36]
   skip: True  # [linux and (s390x or ppc64le)]
 
 requirements:
@@ -32,27 +32,26 @@ requirements:
     - wheel
   run:
     - python
-    - pip    >=18.0
-    - setuptools
-    - wheel
+    - pip >=18.0
     - anyqt >=0.1.0
     - pyqt
     - docutils
     - commonmark >=0.8.1
     - requests
-    - cachecontrol >=0.12.6
+    - cachecontrol-with-filecache >=0.12.6
     # via cachecontrol[filecache]
-    - lockfile >=0.9
     - dictdiffer
     - qasync
-    - importlib_metadata
 
-{% if enable_testingui %}
 test:
   imports:
     - orangecanvas.main
     - orangecanvas.application.canvasmain
-{% endif %}
+  commands:
+    - pip check
+  requires:
+    - python
+    - pip
 
 about:
   home: https://github.com/biolab/orange-canvas-core
