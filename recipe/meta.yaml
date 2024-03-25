@@ -1,6 +1,6 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.1.29" %}
-{% set sha256 = "2541f14ca598f051a0bea0663bc9bcb61ac1790dc2b50292367728f5948a5e7f" %}
+{% set version = "0.1.35" %}
+{% set sha256 = "c4b0b08de343c7d46ac65364216328d0f72b83b6a41aebb846ff6844380e2b5f" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
