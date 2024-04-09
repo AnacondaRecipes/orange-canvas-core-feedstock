@@ -41,7 +41,7 @@ requirements:
     - dictdiffer
     - qasync >=0.10.0
     - packaging
-    - {{ pin_compatible('numpy') }}
+    - numpy
 
 test:
   imports:
