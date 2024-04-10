@@ -50,7 +50,6 @@ test:
   commands:
     - pip check
   requires:
-    - python
     - pip
 
 about:
