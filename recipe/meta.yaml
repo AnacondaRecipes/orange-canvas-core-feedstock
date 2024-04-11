@@ -1,6 +1,6 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.1.29" %}
-{% set sha256 = "2541f14ca598f051a0bea0663bc9bcb61ac1790dc2b50292367728f5948a5e7f" %}
+{% set version = "0.1.35" %}
+{% set sha256 = "c4b0b08de343c7d46ac65364216328d0f72b83b6a41aebb846ff6844380e2b5f" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
@@ -33,15 +33,15 @@ requirements:
   run:
     - python
     - pip >=18.0
-    - anyqt >=0.1.0
-    - pyqt
+    - anyqt >=0.2.0
     - docutils
     - commonmark >=0.8.1
     - requests
-    - cachecontrol-with-filecache >=0.12.6
-    # via cachecontrol[filecache]
+    - requests-cache
     - dictdiffer
-    - qasync
+    - qasync >=0.10.0
+    - packaging
+    - numpy
 
 test:
   imports:
@@ -50,7 +50,6 @@ test:
   commands:
     - pip check
   requires:
-    - python
     - pip
 
 about:
