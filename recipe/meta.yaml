@@ -42,6 +42,8 @@ requirements:
     - qasync >=0.10.0
     - packaging
     - numpy
+    - importlib_metadata >=4.6  # [py<310]
+    - importlib_resources  # [py<39]
 
 test:
   imports:
