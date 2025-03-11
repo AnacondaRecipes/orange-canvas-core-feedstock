@@ -1,6 +1,5 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.1.35" %}
-{% set sha256 = "c4b0b08de343c7d46ac65364216328d0f72b83b6a41aebb846ff6844380e2b5f" %}
+{% set version = "0.2.5" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
@@ -15,13 +14,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/biolab/{{ name }}/archive/refs/tags/0.2.5.tar.gz
+  sha256: 302768229eab2497bc900d7dcbedd913b6d6fa6c1d336593dbe3e19abc49cf53
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<36]
+  skip: True  # [py<38]
   skip: True  # [linux and (s390x or ppc64le)]
 
 requirements:
@@ -30,6 +29,7 @@ requirements:
     - pip
     - setuptools
     - wheel
+    - trubar >=0.3.3
   run:
     - python
     - pip >=18.0
@@ -45,8 +45,7 @@ requirements:
 
 test:
   imports:
-    - orangecanvas.main
-    - orangecanvas.application.canvasmain
+    - orangecanvas
   commands:
     - pip check
   requires:
