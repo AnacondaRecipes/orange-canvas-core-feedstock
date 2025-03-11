@@ -52,6 +52,7 @@ test:
     - pip check
   requires:
     - pip
+    - typing-extensions
 
 about:
   home: https://github.com/biolab/orange-canvas-core
