@@ -43,6 +43,7 @@ requirements:
     - numpy
     - importlib_metadata >=4.6  # [py<310]
     - importlib_resources  # [py<39]
+    - typing-extensions
 
 test:
   imports:
@@ -51,7 +52,6 @@ test:
     - pip check
   requires:
     - pip
-    - typing-extensions
 
 about:
   home: https://github.com/biolab/orange-canvas-core
