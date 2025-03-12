@@ -20,8 +20,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<38]
-  skip: True  # [linux and (s390x or ppc64le)]
+  skip: True  # [py<38 or s390x]
 
 requirements:
   host:
@@ -29,10 +28,9 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - trubar >=0.3.3
+    - trubar
   run:
     - python
-    - pip >=18.0
     - anyqt >=0.2.0
     - docutils
     - commonmark >=0.8.1
@@ -60,14 +58,12 @@ about:
   license_family: GPL
   license_file: LICENSE.txt
   summary: Core component of Orange Canvas
-
   description: |
     Orange Canvas Core is is a framework for building graphical user
     interfaces for editing workflows. It is a component used to build
     the Orange Canvas (http://orange.biolab.si) data-mining application
     (for which it was developed in the first place).
-
-  doc_url: https://orange-canvas-core.readthedocs.io/
+  doc_url: https://github.com/biolab/orange-canvas-core/blob/master/README.rst
   dev_url: https://github.com/biolab/orange-canvas-core
 
 extra:
