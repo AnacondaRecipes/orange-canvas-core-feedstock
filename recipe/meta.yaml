@@ -28,8 +28,9 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - trubar
+    - trubar >=0.3.3
   run:
+    - pip >=18.0
     - python
     - anyqt >=0.2.0
     - docutils
