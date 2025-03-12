@@ -1,6 +1,5 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.1.35" %}
-{% set sha256 = "c4b0b08de343c7d46ac65364216328d0f72b83b6a41aebb846ff6844380e2b5f" %}
+{% set version = "0.2.5" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
@@ -15,14 +14,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/biolab/{{ name }}/archive/refs/tags/0.2.5.tar.gz
+  sha256: 302768229eab2497bc900d7dcbedd913b6d6fa6c1d336593dbe3e19abc49cf53
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<36]
-  skip: True  # [linux and (s390x or ppc64le)]
+  skip: True  # [py<38 or s390x]
 
 requirements:
   host:
@@ -30,9 +28,10 @@ requirements:
     - pip
     - setuptools
     - wheel
+    - trubar >=0.3.3
   run:
-    - python
     - pip >=18.0
+    - python
     - anyqt >=0.2.0
     - docutils
     - commonmark >=0.8.1
@@ -42,11 +41,13 @@ requirements:
     - qasync >=0.10.0
     - packaging
     - numpy
+    - importlib_metadata >=4.6  # [py<310]
+    - importlib_resources  # [py<39]
+    - typing-extensions
 
 test:
   imports:
-    - orangecanvas.main
-    - orangecanvas.application.canvasmain
+    - orangecanvas
   commands:
     - pip check
   requires:
@@ -58,14 +59,12 @@ about:
   license_family: GPL
   license_file: LICENSE.txt
   summary: Core component of Orange Canvas
-
   description: |
     Orange Canvas Core is is a framework for building graphical user
     interfaces for editing workflows. It is a component used to build
     the Orange Canvas (http://orange.biolab.si) data-mining application
     (for which it was developed in the first place).
-
-  doc_url: https://orange-canvas-core.readthedocs.io/
+  doc_url: https://github.com/biolab/orange-canvas-core/blob/master/README.rst
   dev_url: https://github.com/biolab/orange-canvas-core
 
 extra:
