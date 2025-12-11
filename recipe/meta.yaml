@@ -60,10 +60,9 @@ about:
   license_file: LICENSE.txt
   summary: Core component of Orange Canvas
   description: |
-    Orange Canvas Core is is a framework for building graphical user
-    interfaces for editing workflows. It is a component used to build
-    the Orange Canvas (http://orange.biolab.si) data-mining application
-    (for which it was developed in the first place).
+    Orange Canvas Core is is a framework for building graphical user interfaces
+    for editing workflows. It is a component used to build the Orange Canvas
+    data-mining application (for which it was developed in the first place).
   doc_url: https://github.com/biolab/orange-canvas-core/blob/master/README.rst
   dev_url: https://github.com/biolab/orange-canvas-core
 
