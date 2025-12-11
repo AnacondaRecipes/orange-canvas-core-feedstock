@@ -1,5 +1,5 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.2.5" %}
+{% set version = "0.2.6" %}
 
 # on our linux builders there is no X11 installed and therefore import
 # test will fail
@@ -14,8 +14,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/biolab/{{ name }}/archive/refs/tags/0.2.5.tar.gz
-  sha256: 302768229eab2497bc900d7dcbedd913b6d6fa6c1d336593dbe3e19abc49cf53
+  url: https://github.com/biolab/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: bb6626ed7e8bb65113041f92a00f50780d3ff88da0fb57a5c02dee3a0374bfd9
 
 build:
   number: 0
