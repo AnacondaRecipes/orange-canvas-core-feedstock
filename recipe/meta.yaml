@@ -48,6 +48,7 @@ test:
   imports:
     - orangecanvas
   commands:
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pip check
   requires:
     - pip
