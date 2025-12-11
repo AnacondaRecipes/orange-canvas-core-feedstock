@@ -20,7 +20,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<310]
+  skip: true  # [py<310]
 
 requirements:
   host:
@@ -41,9 +41,8 @@ requirements:
     - qasync >=0.10.0
     - packaging
     - numpy
-    - importlib_metadata >=4.6  # [py<310]
-    - importlib_resources  # [py<39]
     - typing-extensions
+    - truststore
 
 test:
   imports:
