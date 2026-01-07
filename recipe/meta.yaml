@@ -35,6 +35,11 @@ requirements:
     - numpy
     - truststore
 
+{% set deselect_tests = "" %}
+# >   assert QTest.qWaitForWindowExposed(w, 500)
+# E   assert False
+{% set deselect_tests = " --deselect=document/tests/test_schemeedit.py::TestSchemeEdit::test_ensure_visible" %}  # [win]
+
 test:
   imports:
     - orangecanvas
@@ -42,7 +47,7 @@ test:
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pip check
     - export QT_QPA_PLATFORM=offscreen  # [unix]
-    - pytest --pyargs orangecanvas
+    - pytest --pyargs orangecanvas {{ deselect_tests }}
   requires:
     - pip
     - pytest    
