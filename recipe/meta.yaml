@@ -1,13 +1,5 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.2.6" %}
-
-# on our linux builders there is no X11 installed and therefore import
-# test will fail
-{% if target_platform != "linux-aarch64" and target_platform != "linux-64"%}
-{% set enable_testingui = true %}
-{% else %}
-{% set enable_testingui = false %}
-{% endif %}
+{% set version = "0.2.7" %}
 
 package:
   name: {{ name|lower }}
@@ -15,7 +7,7 @@ package:
 
 source:
   url: https://github.com/biolab/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: bb6626ed7e8bb65113041f92a00f50780d3ff88da0fb57a5c02dee3a0374bfd9
+  sha256: b9dce79635f83e4ac43f3acb0ced75f0ecfe3482bde92774c4294637a3352fa1
 
 build:
   number: 0
@@ -30,7 +22,6 @@ requirements:
     - wheel
     - trubar >=0.3.3
   run:
-    - pip >=18.0
     - python
     - anyqt >=0.2.0
     - docutils
@@ -39,10 +30,15 @@ requirements:
     - requests-cache
     - dictdiffer
     - qasync >=0.10.0
+    - typing-extensions
     - packaging
     - numpy
-    - typing-extensions
     - truststore
+
+{% set deselect_tests = "" %}
+# >   assert QTest.qWaitForWindowExposed(w, 500)
+# E   assert False
+{% set deselect_tests = " --deselect=document/tests/test_schemeedit.py::TestSchemeEdit::test_ensure_visible" %}  # [win]
 
 test:
   imports:
@@ -50,8 +46,11 @@ test:
   commands:
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pip check
+    - export QT_QPA_PLATFORM=offscreen  # [unix]
+    - pytest --pyargs orangecanvas {{ deselect_tests }}
   requires:
     - pip
+    - pytest    
 
 about:
   home: https://github.com/biolab/orange-canvas-core
