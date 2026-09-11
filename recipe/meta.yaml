@@ -52,6 +52,7 @@ test:
   requires:
     - pip
     - pytest
+    - libegl-devel  # [linux and x86_64]
 
 about:
   home: https://github.com/biolab/orange-canvas-core

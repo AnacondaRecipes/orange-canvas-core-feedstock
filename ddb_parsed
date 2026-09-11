@@ -1,0 +1,14 @@
+[
+  {
+    "name": "orange-widget-base",
+    "version": "4.27.0",
+    "depends_on": "orange-canvas-core >=0.2a.dev0,<0.3a",
+    "recommended_action": "retest"
+  },
+  {
+    "name": "orange3",
+    "version": "3.40.0",
+    "depends_on": "orange-canvas-core >=0.2.5,<0.3a",
+    "recommended_action": "retest"
+  }
+]
