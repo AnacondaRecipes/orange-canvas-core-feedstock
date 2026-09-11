@@ -1,17 +1,13 @@
 {% set name = "orange-canvas-core" %}
 {% set version = "0.2.9" %}
-{% set deselect_tests = "" %}
-{% set deselect_tests = " --deselect=document/tests/test_schemeedit.py::TestSchemeEdit::test_ensure_visible" %}  # [win]
 
-# >   assert QTest.qWaitForWindowExposed(w, 500)
-# E   assert False
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/biolab/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 845628aa66a3e4c0d5261720c230e8aa1c52ee34de2b696f2936be91b20fee1b
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 161148da1ae36293379bd8675b9ec2d4fe46815d1e8b9af628941f284fccdb27
 
 build:
   number: 0
@@ -32,14 +28,18 @@ requirements:
     - commonmark >=0.8.1
     - requests
     - requests-cache
+    - pip >=18.0
     - dictdiffer
     - qasync >=0.10.0
     - typing-extensions
     - packaging
     - numpy
     - truststore
-    - pip >=18.0
-    - typing_extensions
+
+# >   assert QTest.qWaitForWindowExposed(w, 500)
+# E   assert False
+{% set deselect_tests = "" %}
+{% set deselect_tests = " --deselect=document/tests/test_schemeedit.py::TestSchemeEdit::test_ensure_visible" %}  # [win]
 
 test:
   imports:
@@ -72,3 +72,5 @@ extra:
     - lanzagar
     - markotoplak
     - primozgodec
+  skip-lints:
+    - python_build_tools_in_host
