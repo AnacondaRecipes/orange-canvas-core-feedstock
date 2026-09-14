@@ -44,12 +44,23 @@ requirements:
 test:
   imports:
     - orangecanvas
+    - orangecanvas.application
+    - orangecanvas.canvas
+    - orangecanvas.document
+    - orangecanvas.gui
+    - orangecanvas.help
+    - orangecanvas.icons
+    - orangecanvas.localization
+    - orangecanvas.preview
+    - orangecanvas.registry
+    - orangecanvas.scheme
+    - orangecanvas.styles
+    - orangecanvas.utils
   commands:
-    - set PYTHONFAULTHANDLER=1        # [win]
-    - export PYTHONFAULTHANDLER=1     # [unix]
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pip check
     - export QT_QPA_PLATFORM=offscreen  # [unix]
+    - set QT_QPA_PLATFORM=offscreen  # [win]
     - pytest --pyargs orangecanvas {{ deselect_tests }}
   requires:
     - pip
