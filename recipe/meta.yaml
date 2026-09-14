@@ -1,13 +1,13 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.2.7" %}
+{% set version = "0.2.9" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/biolab/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: b9dce79635f83e4ac43f3acb0ced75f0ecfe3482bde92774c4294637a3352fa1
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 161148da1ae36293379bd8675b9ec2d4fe46815d1e8b9af628941f284fccdb27
 
 build:
   number: 0
@@ -28,6 +28,7 @@ requirements:
     - commonmark >=0.8.1
     - requests
     - requests-cache
+    - pip >=18.0
     - dictdiffer
     - qasync >=0.10.0
     - typing-extensions
@@ -35,22 +36,36 @@ requirements:
     - numpy
     - truststore
 
-{% set deselect_tests = "" %}
 # >   assert QTest.qWaitForWindowExposed(w, 500)
 # E   assert False
+{% set deselect_tests = "" %}
 {% set deselect_tests = " --deselect=document/tests/test_schemeedit.py::TestSchemeEdit::test_ensure_visible" %}  # [win]
 
 test:
   imports:
     - orangecanvas
+    - orangecanvas.application
+    - orangecanvas.canvas
+    - orangecanvas.document
+    - orangecanvas.gui
+    - orangecanvas.help
+    - orangecanvas.icons
+    - orangecanvas.localization
+    - orangecanvas.preview
+    - orangecanvas.registry
+    - orangecanvas.scheme
+    - orangecanvas.styles
+    - orangecanvas.utils
   commands:
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pip check
     - export QT_QPA_PLATFORM=offscreen  # [unix]
+    - set QT_QPA_PLATFORM=offscreen  # [win]
     - pytest --pyargs orangecanvas {{ deselect_tests }}
   requires:
     - pip
-    - pytest    
+    - pytest
+    - libegl-devel  # [linux and x86_64]
 
 about:
   home: https://github.com/biolab/orange-canvas-core
@@ -71,3 +86,5 @@ extra:
     - lanzagar
     - markotoplak
     - primozgodec
+  skip-lints:
+    - python_build_tools_in_host
