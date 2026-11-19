@@ -1,5 +1,5 @@
 {% set name = "orange-canvas-core" %}
-{% set version = "0.2.9" %}
+{% set version = "0.2.10" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 161148da1ae36293379bd8675b9ec2d4fe46815d1e8b9af628941f284fccdb27
+  sha256: 4d85810e2796d83553c61eb3fd22a4963bce6d193c9273811597884217c1ddb0
 
 build:
   number: 0
@@ -31,7 +31,7 @@ requirements:
     - pip >=18.0
     - dictdiffer
     - qasync >=0.10.0
-    - typing-extensions
+    - typing_extensions
     - packaging
     - numpy
     - truststore
